@@ -18,117 +18,128 @@
     if (e.key === "Escape") setMenu(false);
   });
 
+  /* ---------- Logo: back to the top of the page ---------- */
+  document.querySelector(".brand").addEventListener("click", function (e) {
+    e.preventDefault();
+    setMenu(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+  });
+
   document.getElementById("year").textContent = new Date().getFullYear();
 
   /* ---------- Language (English / Greek) ---------- */
-  var el = {
-    "skip": "Μετάβαση στο περιεχόμενο",
-    "nav.services": "Υπηρεσίες",
+  var en = {
+    "skip": "Skip to content",
+    "nav.services": "Services",
     "nav.rotary": "Rotary",
-    "nav.parts": "Ανταλλακτικά",
-    "nav.about": "Σχετικά",
-    "nav.contact": "Επικοινωνία",
-    "hero.eyebrow": "Χαλάνδρι · Αθήνα",
-    "hero.title": "Εξειδίκευση σε Rotary &amp; Mazda στην Αθήνα",
-    "hero.lead": "Service, ανακατασκευές περιστροφικών κινητήρων, επαναπρογραμματισμός ECU και ανταλλακτικά επιδόσεων, για καθημερινά αυτοκίνητα και αγωνιστικές κατασκευές.",
-    "hero.book": "Κλείστε ραντεβού",
-    "hero.services": "Δείτε τις υπηρεσίες",
-    "hero.f1": "Περιστροφικοί κινητήρες",
+    "nav.parts": "Parts &amp; Brands",
+    "nav.about": "About",
+    "nav.contact": "Contact",
+    "hero.eyebrow": "Chalandri · Athens",
+    "hero.title": "Rotary &amp; Mazda specialists in Athens",
+    "hero.lead": "Servicing, rotary engine rebuilds, ECU remapping and performance parts, for daily drivers and track builds alike.",
+    "hero.book": "Book your car in",
+    "hero.services": "See our services",
+    "hero.f1": "Rotary engines",
     "hero.f2": "NB · NC · ND",
-    "hero.f3": "Remap &amp; tuning",
-    "hero.alt": "Η πρόσοψη του συνεργείου 10k RPM στο Χαλάνδρι με ένα RX-8 και ένα RX-7 μέσα",
-    "services.eyebrow": "Τι κάνουμε",
-    "services.title": "Υπηρεσίες συνεργείου",
-    "services.lead": "Όλα κάτω από την ίδια στέγη, από ένα απλό service μέχρι πλήρη κατασκευή κινητήρα.",
-    "s1.t": "Ανακατασκευή rotary κινητήρων",
-    "s1.d": "Ανακατασκευές και επισκευές κινητήρων 13B, 13B-REW twin turbo και RENESIS για RX-7 και RX-8.",
-    "s2.t": "Επαναπρογραμματισμός ECU",
-    "s2.d": "Προσαρμοσμένο tuning και διαχείριση κινητήρα με συστήματα EcuTek, FuelTech, AEM και MoTeC.",
-    "s3.t": "Service &amp; tune-up",
-    "s3.d": "Μπουζί, μπουζοκαλώδια, πολλαπλασιαστές, φίλτρα και λάδια για MX-5 NB, NC και ND, RX-7 και RX-8, με ανταλλακτικά NGK, K&amp;N και Idemitsu.",
-    "s4.t": "Κεραμική επίστρωση εξάτμισης",
-    "s4.d": "Θερμομονωτική επίστρωση ζιρκονίας HVOF για πολλαπλές και εξατμίσεις. Μειώνει τη θερμοκρασία επιφάνειας έως και κατά ένα τρίτο, ώστε πιο δροσερός αέρας να φτάνει στην εισαγωγή.",
-    "s5.t": "Συστήματα εξάτμισης",
-    "s5.d": "Πολλαπλές 10k RPM και ολοκληρωμένα συστήματα εξάτμισης, μεταξύ αυτών και Akrapovič.",
-    "s6.t": "Μετάδοση κίνησης",
-    "s6.d": "Εργασίες σε κιβώτιο και συμπλέκτη, συμπλέκτες Alcon και βαλβολίνες Idemitsu Racing.",
-    "s7.t": "Φρένα &amp; ανάρτηση",
-    "s7.d": "Φρένα EBC και Alcon, καθώς και εξαρτήματα πλαισίου Whiteline και Ultra Racing για πιο σφιχτό κράτημα.",
-    "s8.t": "Ψύξη &amp; καύσιμο",
-    "s8.d": "Ψυγεία και intercooler Mishimoto, και αναβαθμίσεις καυσίμου και ανάφλεξης FuelTech.",
-    "rotary.eyebrow": "Η ειδικότητά μας",
-    "rotary.title": "Οι περιστροφικοί κινητήρες είναι αυτό που ξέρουμε καλύτερα",
-    "rotary.p1": "Οι rotary κινητήρες θέλουν εξειδικευμένη γνώση, σωστά ανταλλακτικά και σωστό λάδι. Τους συντηρούμε, τους ρυθμίζουμε και τους ανακατασκευάζουμε καθημερινά.",
-    "rotary.p2": "Δουλεύουμε επίσης Mazda MX-5 και άλλα αυτοκίνητα επιδόσεων. Πάρτε μας τηλέφωνο και πείτε μας τι οδηγείτε.",
-    "rotary.cta": "Ρωτήστε για το αυτοκίνητό σας",
-    "oil.eyebrow": "Νέο στο κατάστημα",
+    "hero.f3": "Remapping &amp; tuning",
+    "services.eyebrow": "What we do",
+    "services.title": "Workshop services",
+    "services.lead": "Everything under one roof, from a routine service to a full engine build.",
+    "s1.t": "Rotary engine rebuilds",
+    "s1.d": "Rebuilds and repairs for 13B, 13B-REW twin turbo and RENESIS engines in the RX-7 and RX-8.",
+    "s2.t": "ECU remapping",
+    "s2.d": "Custom tuning and engine management with EcuTek, FuelTech, AEM and MoTeC systems.",
+    "s3.t": "Servicing &amp; tune-ups",
+    "s3.d": "Plugs, leads, coils, filters and oil for MX-5 NB, NC and ND, RX-7 and RX-8, using NGK, K&amp;N and Idemitsu parts.",
+    "s4.t": "Ceramic exhaust coating",
+    "s4.d": "HVOF zirconia thermal barrier coating for manifolds and exhausts. It cuts exhaust surface temperature by up to a third, so cooler air reaches the intake.",
+    "s5.t": "Power exhaust systems",
+    "s5.d": "10k RPM manifolds and complete exhaust systems, including Akrapovič.",
+    "s6.t": "Transmission",
+    "s6.d": "Gearbox and clutch work, Alcon clutches and Idemitsu Racing gear oil.",
+    "s7.t": "Brakes &amp; suspension",
+    "s7.d": "EBC and Alcon brakes, plus Whiteline and Ultra Racing chassis parts for sharper handling.",
+    "s8.t": "Cooling &amp; fuel",
+    "s8.d": "Mishimoto radiators and intercoolers, and FuelTech fuel and ignition upgrades.",
+    "rotary.eyebrow": "Our speciality",
+    "rotary.title": "Rotary engines are what we know best",
+    "rotary.p1": "Rotary engines need specialist knowledge, the right parts and the right oil. We service, tune and rebuild them every day.",
+    "rotary.p2": "We also work on Mazda MX-5s and other performance cars. Give us a call and tell us what you drive.",
+    "rotary.cta": "Ask about your car",
+    "oil.eyebrow": "New in store",
     "oil.title": "Idemitsu Racing Black Series",
-    "oil.lead": "Λάδια Racing και Pro Racing από την Ιαπωνία, φτιαγμένα για περιστροφικούς κινητήρες. Νιώστε τη διαφορά στον rotary σας.",
-    "oil.cta": "Ρωτήστε για διαθεσιμότητα",
-    "oil.alt": "Φιάλες λαδιού Idemitsu Racing",
-    "brands.title": "Μάρκες που τοποθετούμε και διαθέτουμε",
-    "about.title": "Σχετικά με την 10k RPM",
-    "about.p1": "Η 10k RPM είναι ανεξάρτητο συνεργείο επιδόσεων στο Χαλάνδρι. Φροντίζουμε rotary Mazda, MX-5 και τροποποιημένα αυτοκίνητα, από το απλό service μέχρι ολοκληρωμένες κατασκευές.",
-    "about.p2": "Δουλεύουμε με τρεις λέξεις: Power, Torque, Drag. Δηλαδή ποιοτικά ανταλλακτικά, προσεκτική δουλειά και ξεκάθαρη συμβουλή πριν αγγίξουμε το αυτοκίνητό σας.",
-    "contact.eyebrow": "Επικοινωνία",
-    "contact.title": "Κλείστε ραντεβού",
-    "contact.lead": "Πάρτε μας τηλέφωνο ή στείλτε τη φόρμα και θα σας απαντήσουμε.",
-    "contact.phone": "Τηλέφωνο",
+    "oil.lead": "Racing and Pro Racing oils from Japan, made for rotary engines. Feel the difference in your rotary.",
+    "oil.cta": "Check availability",
+    "brands.title": "Brands we fit and stock",
+    "about.title": "About 10k RPM",
+    "about.p1": "10k RPM is an independent performance workshop in Chalandri, Athens. We look after rotary Mazdas, MX-5s and modified cars, from routine servicing to complete builds.",
+    "about.p2": "We work to three words: Power, Torque, Drag. That means quality parts, careful work and clear advice before we touch your car.",
+    "contact.eyebrow": "Get in touch",
+    "contact.title": "Book your car in",
+    "contact.lead": "Call us, or send the form and we'll get back to you.",
+    "contact.phone": "Phone",
     "contact.email": "Email",
-    "contact.address": "Διεύθυνση",
-    "contact.addr": "Ηρακλείτου 92, Χαλάνδρι 152 35, Αθήνα",
-    "contact.directions": "Οδηγίες χάρτη →",
-    "form.name": "Ονοματεπώνυμο",
-    "form.phone": "Τηλέφωνο",
-    "form.car": "Αυτοκίνητο (μοντέλο &amp; έτος)",
-    "form.carph": "π.χ. RX-8 2005",
-    "form.service": "Τι χρειάζεστε;",
+    "contact.address": "Address",
+    "contact.addr": "92 Iraklitou St., Chalandri 152 35, Athens",
+    "contact.directions": "Get directions →",
+    "form.name": "Your name",
+    "form.phone": "Phone",
+    "form.car": "Car (model &amp; year)",
+    "form.service": "What do you need?",
     "form.o1": "Service / tune-up",
-    "form.o2": "Ανακατασκευή rotary κινητήρα",
-    "form.o3": "Επαναπρογραμματισμός ECU",
-    "form.o4": "Κεραμική επίστρωση εξάτμισης",
-    "form.o5": "Ανταλλακτικά / λάδια",
-    "form.o6": "Κάτι άλλο",
-    "form.msg": "Μήνυμα",
-    "form.err": "Συμπληρώστε το όνομα και το τηλέφωνό σας.",
-    "form.send": "Αποστολή",
-    "form.note": "Ανοίγει την εφαρμογή email σας με τα στοιχεία συμπληρωμένα.",
-    "footer.addr": "Ηρακλείτου 92, Χαλάνδρι 152 35, Αθήνα",
-    "qb.call": "Κλήση",
-    "qb.dir": "Οδηγίες",
-    "qb.book": "Ραντεβού"
+    "form.o2": "Rotary engine rebuild",
+    "form.o3": "ECU remapping",
+    "form.o4": "Ceramic exhaust coating",
+    "form.o5": "Parts / oil",
+    "form.o6": "Something else",
+    "form.msg": "Message",
+    "form.err": "Please add your name and phone number.",
+    "form.send": "Send enquiry",
+    "form.note": "This opens your email app with your details filled in.",
+    "footer.addr": "92 Iraklitou St., Chalandri 152 35, Athens, Greece",
+    "qb.call": "Call",
+    "qb.dir": "Directions",
+    "qb.book": "Book",
+    "hero.alt": "The 10k RPM workshop front in Chalandri with an RX-8 and RX-7 inside",
+    "oil.alt": "Idemitsu Racing engine oil bottles",
+    "form.carph": "e.g. RX-8 2005"
   };
 
   var nodes = document.querySelectorAll("[data-i18n]");
   var altNodes = document.querySelectorAll("[data-i18n-alt]");
   var phNodes = document.querySelectorAll("[data-i18n-ph]");
-  var en = {};
-  nodes.forEach(function (n) { en[n.dataset.i18n] = n.innerHTML; });
-  altNodes.forEach(function (n) { en[n.dataset.i18nAlt] = n.alt; });
-  phNodes.forEach(function (n) { en[n.dataset.i18nPh] = n.placeholder; });
-  var enTitle = document.title;
+
+  // The page is written in Greek; keep a copy so we can switch back.
+  var el = {};
+  nodes.forEach(function (n) { el[n.dataset.i18n] = n.innerHTML; });
+  altNodes.forEach(function (n) { el[n.dataset.i18nAlt] = n.alt; });
+  phNodes.forEach(function (n) { el[n.dataset.i18nPh] = n.placeholder; });
+  var elTitle = document.title;
 
   var langBtn = document.getElementById("lang");
-  var current = "en";
+  var current = "el";
 
   function apply(lang) {
-    var dict = lang === "el" ? el : en;
+    var dict = lang === "en" ? en : el;
     nodes.forEach(function (n) { var v = dict[n.dataset.i18n]; if (v != null) n.innerHTML = v; });
     altNodes.forEach(function (n) { var v = dict[n.dataset.i18nAlt]; if (v != null) n.alt = v; });
     phNodes.forEach(function (n) { var v = dict[n.dataset.i18nPh]; if (v != null) n.placeholder = v; });
     document.documentElement.lang = lang;
-    document.title = lang === "el" ? "10k RPM | Εξειδίκευση σε Rotary & Mazda στην Αθήνα" : enTitle;
-    langBtn.textContent = lang === "el" ? "EN" : "ΕΛ";
-    langBtn.setAttribute("aria-label", lang === "el" ? "Switch language to English" : "Αλλαγή γλώσσας σε Ελληνικά");
+    document.title = lang === "en" ? "10k RPM | Rotary & Mazda Specialists in Athens" : elTitle;
+    langBtn.textContent = lang === "en" ? "ΕΛ" : "EN";
+    langBtn.setAttribute("aria-label", lang === "en" ? "Αλλαγή γλώσσας σε Ελληνικά" : "Switch language to English");
     current = lang;
     try { localStorage.setItem("lang", lang); } catch (e) {}
   }
 
-  langBtn.addEventListener("click", function () { apply(current === "en" ? "el" : "en"); });
+  langBtn.addEventListener("click", function () { apply(current === "el" ? "en" : "el"); });
 
+  // Greek is the default; English only if the visitor chose it before.
   var saved = null;
   try { saved = localStorage.getItem("lang"); } catch (e) {}
-  if (saved === "el" || (!saved && /^el\b/i.test(navigator.language || ""))) apply("el");
+  if (saved === "en") apply("en");
 
   /* ---------- Enquiry form -> pre-filled email ---------- */
   var form = document.getElementById("enquiry");

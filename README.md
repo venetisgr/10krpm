@@ -5,7 +5,7 @@ A modern, mobile-friendly rebuild of [10k-rpm.com](https://10k-rpm.com/index.htm
 ## What's in it
 
 - One fast, static page: no build step, no framework, no database.
-- English / Greek switch (it remembers the visitor's choice and picks Greek automatically for Greek browsers).
+- Greek by default, with a one-tap switch to English (the visitor's choice is remembered).
 - Tap-to-call, directions and booking buttons that stay on screen on phones.
 - An enquiry form that opens the visitor's email app with their details filled in, sent to info@10k-rpm.com.
 - Google Map, search-engine business details (schema.org `AutoRepair`) and social links.
@@ -14,9 +14,9 @@ A modern, mobile-friendly rebuild of [10k-rpm.com](https://10k-rpm.com/index.htm
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | Page content (English) |
+| `index.html` | Page content (Greek) |
 | `styles.css` | Design and layout |
-| `script.js` | Mobile menu, Greek translations, enquiry form |
+| `script.js` | Mobile menu, logo back-to-top, English translations, enquiry form |
 | `assets/` | Workshop photo, Idemitsu photo, icon |
 
 ## Preview locally
