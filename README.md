@@ -8,7 +8,8 @@ A modern, mobile-friendly rebuild of [10k-rpm.com](https://10k-rpm.com/index.htm
 - Greek by default, with a one-tap switch to English (the visitor's choice is remembered).
 - Tap-to-call, directions and booking buttons that stay on screen on phones.
 - An enquiry form that opens the visitor's email app with their details filled in, sent to info@10k-rpm.com.
-- Google Map, search-engine business details (schema.org `AutoRepair`) and social links.
+- Google Map and search-engine business details (schema.org `AutoRepair`).
+- Social media up front: icons in the opening section, a "See our work" section with Instagram, TikTok and Facebook cards, and a TikTok feed that loads only when the visitor taps (no third-party cookies before consent). If TikTok can't load, the box turns into an "Open on TikTok" button. Social icons also appear in the mobile menu and footer of every page.
 
 ## Files
 
