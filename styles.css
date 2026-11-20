@@ -252,7 +252,7 @@ html:has(.cat-nav) { scroll-padding-top: calc(var(--header-h) + 72px); }
 .si-stroke .dot { fill: currentColor; stroke: none; }
 
 /* Home: social section */
-.social-cards { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-bottom: 24px; }
+.social-cards { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 .social-card { display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 16px; row-gap: 14px; align-items: center; text-decoration: none; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; transition: border-color .2s, transform .2s; }
 .social-card:hover { border-color: var(--accent); transform: translateY(-2px); }
 .sc-icon { width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; color: #fff; background: var(--surface-2); }
@@ -266,17 +266,6 @@ html:has(.cat-nav) { scroll-padding-top: calc(var(--header-h) + 72px); }
 .sc-cta { grid-column: 1 / -1; display: inline-flex; justify-content: center; align-items: center; min-height: 44px; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 600; }
 .social-card:hover .sc-cta { background: var(--accent-hover); }
 
-.embeds { display: grid; gap: 14px; }
-.embeds { max-width: 780px; margin: 0 auto; }
-.embed { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); min-height: 280px; display: grid; overflow: hidden; }
-.embed-ph { display: grid; justify-items: center; align-content: center; text-align: center; gap: 12px; padding: 32px 24px; }
-.embed-ph h3 { margin: 0; font-size: 1.5rem; }
-.embed-ph p { color: var(--muted); font-size: .9rem; margin: 0; max-width: 30em; }
-.embed[data-embed="tiktok"] .embed-ph .sc-icon { background: #000; box-shadow: inset 2px 0 0 #25f4ee, inset -2px 0 0 #fe2c55; }
-.embed[data-embed="facebook"] .embed-ph .sc-icon { background: #1877f2; }
-.embed.loaded { background: #fff; display: block; padding: 0; }
-.embed.loaded .tiktok-embed { margin: 0 !important; max-width: 100% !important; }
-.embed iframe { display: block; width: 100%; border: 0; }
 
 /* Footer + parts band social icons */
 .footer-social { display: flex; gap: 10px; }

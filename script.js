@@ -28,38 +28,6 @@
     if (location.hash) history.replaceState(null, "", location.pathname + location.search);
   });
 
-  /* ---------- TikTok feed: load only when the visitor asks (cookie consent) ---------- */
-  var TT_USER = "www.10krpm.com";
-  var ttBox = document.querySelector('.embed[data-embed="tiktok"]');
-  if (ttBox) ttBox.querySelector("[data-load]").addEventListener("click", function () {
-    var fallback = ttBox.querySelector(".embed-ph").cloneNode(true);
-    ttBox.classList.add("loaded");
-    ttBox.innerHTML = '<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@' + TT_USER +
-      '" data-unique-id="' + TT_USER + '" data-embed-type="creator" style="max-width:780px;min-width:288px;">' +
-      '<section></section></blockquote>';
-    var s = document.createElement("script");
-    s.src = "https://www.tiktok.com/embed.js";
-    s.async = true;
-    document.body.appendChild(s);
-    // If TikTok doesn't render (blocked, offline, privacy extension), offer a direct link instead.
-    setTimeout(function () {
-      if (ttBox.querySelector("iframe")) return;
-      ttBox.classList.remove("loaded");
-      var btn = fallback.querySelector("[data-load]");
-      var a = document.createElement("a");
-      a.className = btn.className;
-      a.href = "https://www.tiktok.com/@" + TT_USER;
-      a.target = "_blank";
-      a.rel = "noopener";
-      a.textContent = document.documentElement.lang === "en" ? "Open on TikTok →" : "Άνοιγμα στο TikTok →";
-      btn.replaceWith(a);
-      var note = fallback.querySelector("p");
-      if (note) note.remove();
-      ttBox.innerHTML = "";
-      ttBox.appendChild(fallback);
-    }, 8000);
-  });
-
   /* ---------- Parts page: highlight the category in view ---------- */
   var chips = document.querySelectorAll(".cat-nav a");
   if (chips.length && "IntersectionObserver" in window) {
@@ -211,12 +179,7 @@
     "so.eyebrow": "Follow us",
     "so.lead": "Our social pages are full of photos and videos from the workshop: engine rebuilds, builds and the cars that pass through our hands.",
     "so.follow": "Follow →",
-    "so.tt.title": "Our latest TikTok videos",
-    "so.consent": "This content loads from the platform, which may use cookies.",
-    "so.fb.title": "Our latest Facebook posts",
     "so.title": "See our work",
-    "so.tt.btn": "Load videos",
-    "so.fb.btn": "Load posts",
     "nav.social": "Our work",
     "pp.social": "See the parts we fit in action on Instagram, TikTok and Facebook."
   };
