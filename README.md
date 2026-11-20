@@ -4,7 +4,7 @@ A modern, mobile-friendly rebuild of [10k-rpm.com](https://10k-rpm.com/index.htm
 
 ## What's in it
 
-- One fast, static page: no build step, no framework, no database.
+- Two fast, static pages (home and Parts & Brands): no build step, no framework, no database.
 - Greek by default, with a one-tap switch to English (the visitor's choice is remembered).
 - Tap-to-call, directions and booking buttons that stay on screen on phones.
 - An enquiry form that opens the visitor's email app with their details filled in, sent to info@10k-rpm.com.
@@ -14,7 +14,8 @@ A modern, mobile-friendly rebuild of [10k-rpm.com](https://10k-rpm.com/index.htm
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | Page content (Greek) |
+| `index.html` | Home page: services, rotary, parts overview, about, contact (Greek) |
+| `parts.html` | Parts & Brands page: all 27 brands grouped by category (Greek) |
 | `styles.css` | Design and layout |
 | `script.js` | Mobile menu, logo back-to-top, English translations, enquiry form |
 | `assets/` | Workshop photo, Idemitsu photo, icon |

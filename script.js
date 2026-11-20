@@ -18,13 +18,35 @@
     if (e.key === "Escape") setMenu(false);
   });
 
-  /* ---------- Logo: back to the top of the page ---------- */
+  /* ---------- Logo: back to the home page / top of the home page ---------- */
+  var isHome = document.body.dataset.page === "home";
   document.querySelector(".brand").addEventListener("click", function (e) {
+    if (!isHome) return; // normal link to index.html
     e.preventDefault();
     setMenu(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
     if (location.hash) history.replaceState(null, "", location.pathname + location.search);
   });
+
+  /* ---------- Parts page: highlight the category in view ---------- */
+  var chips = document.querySelectorAll(".cat-nav a");
+  if (chips.length && "IntersectionObserver" in window) {
+    var byId = {};
+    chips.forEach(function (c) { byId[c.getAttribute("href").slice(1)] = c; });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        chips.forEach(function (c) { c.classList.remove("active"); });
+        var chip = byId[entry.target.id];
+        if (chip) {
+          chip.classList.add("active");
+          var row = chip.parentNode;
+          row.scrollTo({ left: chip.offsetLeft - row.clientWidth / 2 + chip.clientWidth / 2, behavior: "smooth" });
+        }
+      });
+    }, { rootMargin: "-30% 0px -65% 0px" });
+    document.querySelectorAll(".cat").forEach(function (s) { io.observe(s); });
+  }
 
   document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -72,7 +94,6 @@
     "oil.title": "Idemitsu Racing Black Series",
     "oil.lead": "Racing and Pro Racing oils from Japan, made for rotary engines. Feel the difference in your rotary.",
     "oil.cta": "Check availability",
-    "brands.title": "Brands we fit and stock",
     "about.title": "About 10k RPM",
     "about.p1": "10k RPM is an independent performance workshop in Chalandri, Athens. We look after rotary Mazdas, MX-5s and modified cars, from routine servicing to complete builds.",
     "about.p2": "We work to three words: Power, Torque, Drag. That means quality parts, careful work and clear advice before we touch your car.",
@@ -104,19 +125,71 @@
     "qb.book": "Book",
     "hero.alt": "The 10k RPM workshop front in Chalandri with an RX-8 and RX-7 inside",
     "oil.alt": "Idemitsu Racing engine oil bottles",
-    "form.carph": "e.g. RX-8 2005"
+    "form.carph": "e.g. RX-8 2005",
+    "pc.oil": "Oils &amp; lubricants",
+    "pc.ecu": "Engine management &amp; tuning",
+    "pc.engine": "Engine internals &amp; turbo",
+    "pc.cooling": "Cooling",
+    "pc.service": "Service parts",
+    "pc.exhaust": "Exhaust",
+    "pc.brakes": "Brakes &amp; clutches",
+    "pc.chassis": "Suspension &amp; chassis",
+    "pc.tyres": "Tyres",
+    "pc.more": "Tools &amp; more brands",
+    "hp.eyebrow": "Parts",
+    "hp.lead": "We fit and stock parts from 27 brands, from Idemitsu oils to MoTeC ECUs and Alcon brakes.",
+    "hp.title": "Parts &amp; brands",
+    "hp.cta": "See all parts &amp; brands",
+    "b.fueltech": "Standalone ECUs, fuel and ignition control, and digital dashes.",
+    "b.haltech": "Programmable engine management systems.",
+    "b.motec": "Engine management, data logging and motorsport displays.",
+    "b.link": "Programmable plug-in and wire-in ECUs.",
+    "b.aem": "Performance electronics: wideband gauges, sensors and engine management.",
+    "b.ecutek": "Tuning by reflashing the factory ECU.",
+    "b.cobb": "Accessport handheld tuning.",
+    "b.hptuners": "Tuning and diagnostic software.",
+    "b.k1": "Forged connecting rods and crankshafts.",
+    "b.wiseco": "Forged pistons and engine internals.",
+    "b.je": "Forged racing pistons.",
+    "b.kuro": "Ball-bearing turbochargers.",
+    "b.mishimoto": "Aluminium radiators, intercoolers, oil coolers and silicone hoses.",
+    "b.ngk": "Spark plugs and ignition leads.",
+    "b.kn": "High-flow air and oil filters.",
+    "b.mazda": "Genuine coils, filters and service parts for MX-5, RX-7 and RX-8.",
+    "b.akrapovic": "Titanium and stainless performance exhausts.",
+    "b.10krpm": "Our own manifolds, with optional HVOF ceramic coating.",
+    "b.alcon": "Specialist brakes and clutches.",
+    "b.ebc": "Brake pads and discs for road and track.",
+    "b.whiteline": "Anti-roll bars, bushes and suspension upgrades.",
+    "b.ultraracing": "Strut bars and chassis bracing.",
+    "b.toyo": "Performance tyres for road and track.",
+    "b.nitto": "Extreme performance tyres.",
+    "b.beta": "Professional hand tools.",
+    "b.rptools": "Workshop tools and equipment.",
+    "b.arashi": "Ask us about the Arashi range we stock.",
+    "pp.eyebrow": "Parts &amp; brands",
+    "pp.title": "Parts from brands we trust",
+    "pp.lead": "We fit and stock them at our workshop in Chalandri. Call us for availability and prices.",
+    "pp.call": "Call 210 600 5435",
+    "pp.cta.title": "Can't see what you need?",
+    "pp.cta.text": "We can order most performance parts. Tell us what you're looking for.",
+    "pp.ask": "Send a question",
+    "pp.cats": "Categories"
   };
 
   var nodes = document.querySelectorAll("[data-i18n]");
   var altNodes = document.querySelectorAll("[data-i18n-alt]");
   var phNodes = document.querySelectorAll("[data-i18n-ph]");
+  var ariaNodes = document.querySelectorAll("[data-i18n-aria]");
 
   // The page is written in Greek; keep a copy so we can switch back.
   var el = {};
   nodes.forEach(function (n) { el[n.dataset.i18n] = n.innerHTML; });
   altNodes.forEach(function (n) { el[n.dataset.i18nAlt] = n.alt; });
   phNodes.forEach(function (n) { el[n.dataset.i18nPh] = n.placeholder; });
+  ariaNodes.forEach(function (n) { el[n.dataset.i18nAria] = n.getAttribute("aria-label"); });
   var elTitle = document.title;
+  var enTitle = document.body.dataset.titleEn || elTitle;
 
   var langBtn = document.getElementById("lang");
   var current = "el";
@@ -126,8 +199,9 @@
     nodes.forEach(function (n) { var v = dict[n.dataset.i18n]; if (v != null) n.innerHTML = v; });
     altNodes.forEach(function (n) { var v = dict[n.dataset.i18nAlt]; if (v != null) n.alt = v; });
     phNodes.forEach(function (n) { var v = dict[n.dataset.i18nPh]; if (v != null) n.placeholder = v; });
+    ariaNodes.forEach(function (n) { var v = dict[n.dataset.i18nAria]; if (v != null) n.setAttribute("aria-label", v); });
     document.documentElement.lang = lang;
-    document.title = lang === "en" ? "10k RPM | Rotary & Mazda Specialists in Athens" : elTitle;
+    document.title = lang === "en" ? enTitle : elTitle;
     langBtn.textContent = lang === "en" ? "ΕΛ" : "EN";
     langBtn.setAttribute("aria-label", lang === "en" ? "Αλλαγή γλώσσας σε Ελληνικά" : "Switch language to English");
     current = lang;
@@ -144,7 +218,7 @@
   /* ---------- Enquiry form -> pre-filled email ---------- */
   var form = document.getElementById("enquiry");
   var err = document.getElementById("formError");
-  form.addEventListener("submit", function (e) {
+  if (form) form.addEventListener("submit", function (e) {
     e.preventDefault();
     var name = form.elements.name, phone = form.elements.phone;
     var ok = true;
